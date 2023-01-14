@@ -1,0 +1,26 @@
+require:
+  - rubocop-rspec
+  - rubocop-rails
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'bin/**/*'
+    - 'db/**/*'
+    - 'db/schema.rb'
+    - 'config/**/*'
+    - 'node_modules/**/*'
+    - 'vendor/**/*'
+Style/Documentation: # Checks for missing top-level documentation of classes and modules
+  Enabled: false
+Rails/FilePath: # This cop is used to identify usages of file path joining process
+  EnforcedStyle: arguments
+RSpec/MessageSpies: # Checks that message expectations are set using spies
+  Enabled: false
+Style/FrozenStringLiteralComment: # Checks for # frozen_string_literal: comment
+  Enabled: false
+RSpec/ExampleLength: # Checks for long examples.
+  Exclude:
+    - 'spec/features/*'
+RSpec/ContextWording:
+  AllowedPatterns:
+    - когда
