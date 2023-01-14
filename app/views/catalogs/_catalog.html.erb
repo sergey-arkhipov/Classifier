@@ -1,8 +1,18 @@
-<%=turbo_frame_tag dom_id(catalog), class: 'navbar-menu'  do %>
-
-    <div class="column is-four-fifths">
-    <%= link_to catalog.path, catalogs_path(current_path: catalog.path), target: '_top' , class: 'navbar-item'%>
+<%=turbo_frame_tag dom_id(catalog), class: 'box my-0 py-0' do %>
+  <div class='tile'>
+    <div class="column is-half">
+      <%= link_to catalog.path, catalogs_path(current_path: catalog.path), target: '_top', class: 'navbar-item'%>
     </div>
-    <div class="column"><%= link_to 'Edit', edit_catalog_path(catalog), class: 'navbar-item' %></div>
-    <div class="column"><%= button_to 'Delete', catalog_path(catalog), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-link is-inverted' %></div>
+    <div class="column is-one-fifth">
+      <%= button_to edit_catalog_path(catalog), class: 'button is-link is-inverted', method: 'get' do %>
+        <%= image_tag 'edit_icon', size: '20x20' %>
+      <% end %>
+    </div>
+    <div class="column is-one-fifth">
+      <%= button_to catalog_path(catalog), method: :delete, class: 'button is-link is-inverted' do %>
+        <%= image_tag 'trash', size: '20x20' %>
+      <% end%>
+    </div>
+  </div>
+  <hr class='py-0 my-0'>
 <% end %>

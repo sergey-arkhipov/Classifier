@@ -1,0 +1,46 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+
+ru:
+  activerecord:
+    models:
+      catalog: "Каталог"
+    attributes:
+      catalog:
+        path: "Путь каталога"
+      catalog/status:
+        draft: "Черновик"
+        checking: "На проверке"
+        inactive: "Не активна"
+        published: "Опубликована"
+      create: "Создать"
+    errors:
+      models:
+        catalog:
+          attributes:
+            path:
+              blank: "не может быть пустым"
+              format: "не может содержать специальных символов, кроме подчеркивания"
+      messages:
+        record_invalid: "Запись не корректная"
+
+  catalog:
+    add: "Добавить"
+    article_code: "Код"
+    status: "Статус"
+    title: "Название"
+    changed_date: "Дата изменения"
+    create: "Создать запись"
+    create_draft: "Создать черновик"
+    cancel: "Отмена"
+    tabs:
+      about: "Общая информация"
+      answer: "Ответы"
+      question_example: "Примеры вопросов"
+      settings: "Настройки"
+      reminder: "Оповещения"
+  query_desc: "Введите слова для поиска"
+  query: "Поиск по всем разделам"
+  error: { zero: "ошибок", one: "ошибка", other: "ошибки" }
+  delete: "Запись была успешно удалена"

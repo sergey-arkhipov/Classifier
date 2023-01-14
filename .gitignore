@@ -32,3 +32,4 @@
 .env
 .directory
 /.byebug_history
+/make.md

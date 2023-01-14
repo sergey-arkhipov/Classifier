@@ -1,2 +1,1 @@
-<h1>Cataloges#edit</h1>
-<%= render 'form'%>
+<%= render 'form', frame_id: dom_id(@catalog), catalog: @catalog, current_path: @catalog.path %>

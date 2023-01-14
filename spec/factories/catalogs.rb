@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :catalog do
-    path { "" }
+    path { 'Top' }
   end
 end

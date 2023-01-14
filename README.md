@@ -1,24 +1,58 @@
-# README
+# Classsifier application
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Classifier let ability to create several catalogs with unlimited levels
+aimed support to fast get group of document every levels.
 
-Things you may want to cover:
+## Key features
 
-* Ruby version
+- Postgres fields type ltree is used for paths storage
+- Javascript is not used for add and destroy views fields
+- Rails Turbo and Turbo Frames is used for dynamicaly operate with
+  levels
 
-* System dependencies
+## Software used
 
-* Configuration
+- ruby 3.1.2
+- rails 7.0.4
+- gem 'pg_ltree'
+- bulma css
+- gem 'pg'
 
-* Database creation
+## Description
 
-* Database initialization
+Classsifier let create classifiers. 😀 Apps main view let ability to
+create, update and destroy any classifiers level. Gem pg_ltree let
+opportunity to set how levels can be updated and destroyed.
 
-* How to run the test suite
+### Methods
 
-* Services (job queues, cache servers, search engines, etc.)
+All methods described in pg_ltree
 
-* Deployment instructions
+- :height,
+- :ancestors,
+- :cascade_update,
+- :cascade_destroy,
+- :children,
+- :root,
+- :ltree_path_column,
+- :parent,
+- :leaves,
+- :depth,
+- :root?,
+- :ltree_scope,
+- :ltree_path,
+- :ltree_path_before_last_save,
+- :ltree_path_in_database,
+- :self_and_descendants,
+- :leaf?,
+- :self_and_ancestors,
+- :self_and_siblings,
+- :siblings,
+- :descendants
 
-* ...
+## Install
+
+- git clone
+- bundle install
+- rails db:create db:migrate
+- rails s

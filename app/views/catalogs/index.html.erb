@@ -1,13 +1,33 @@
-<p style="color: green"><%= notice %></p>
-<h1 class='title has-text-centerd'>Catalogs#index</h1>
-<h2 class='title-2'>А здесь путь текущий</h2>
-<hr>
-<b><%=link_to @current_path, catalogs_path(current_path: previous_path(@current_path))  %></b>
-<hr>
-<div class="columns">
-  <%=turbo_frame_tag 'catalogs' do %>
-    <%=turbo_frame_tag 'new', src: new_catalog_path(@catalog) %>
-
-    <%= render @catalogs %>
-  <% end %>
+<div class='container-flex px-2'>
+  <div class='box py-0'>
+    <div class='subtitle is-4'>
+      Наименование/ветка классификатора
+    </div>
+    <%=turbo_frame_tag 'errors' do %>
+      <%= render 'shared/error_messages', obj: @catalog %>
+    <% end %>
+    <%=turbo_frame_tag 'notice' do %>
+      <%= render 'shared/notice', notice: %>
+    <% end %>
+    <div class='box py-1 has-text-weight-bold'>
+      <%=link_to catalogs_path(current_path: previous_path(@current_path)), class: 'navbar-item' do  %>
+        <%= image_tag 'icons8-back-arrow-48' %>
+        <%= @current_path %>
+      <% end%>
+    </div>
+  </div>
+  <div class='box'>
+    <%=turbo_frame_tag 'catalogs' do %>
+      <div class='box py-0'>
+        <%= render 'form', frame_id: 'new', catalog: Catalog.new, current_path: @current_path  %>
+      </div>
+      <div class='box py-0'>
+        <div class="column is-half">
+          <div class='has-text-weight-bold'>Наименование классификатора/ветки<sup>*</sup></div>
+          <span class='is-size-7'><sup>*</sup> Нажимите чтобы открыть</span>
+        </div>
+      </div>
+      <%= render @catalogs %>
+    <% end %>
+  </div>
 </div>

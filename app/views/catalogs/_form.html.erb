@@ -1,13 +1,13 @@
- <%= turbo_frame_tag dom_id(@catalog) do %>
- <%= form_with(model: @catalog,
-               data: { controller: 'reset-form', action: 'turbo:submit-end->reset-form#reset' }) do |form| %>
-    <div class="columns">
-    <div class="column is-four-fifths">
-      <%= form.text_field :path, class: 'input'%>
+ <%= turbo_frame_tag frame_id do %>
+  <%= form_with model: catalog do |form| %>
+    <div class="columns is-mobile">
+      <div class="column is-two-thirds">
+        <%= form.text_field :path, value: current_path, class: 'input'%>
+        <span class='is-size-7' data-tooltip="Введите полный путь классификатора, разделяя уровни точкой"><sup>*</sup>Введите полное название ветки классификатора </span>
       </div>
       <div class="column">
-      <%= form.submit 'Обновить' , class: 'button is-success is-outlined' %>
+        <%= form.submit class: 'button is-success is-outlined' %>
       </div>
     </div>
   <% end %>
-  <% end %>
+<% end %>

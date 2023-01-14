@@ -1,0 +1,12 @@
+<% if obj %>
+  <% if obj.errors.any? %>
+    <div class='has-text-danger'>
+      <h2 class= 'has-text-weight-bold'><%="#{obj.errors.count}  #{t(:error, count: obj.errors.count)}:" %></h2>
+      <ul>
+        <% obj.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+<% end %>

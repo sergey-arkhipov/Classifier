@@ -1,18 +1,12 @@
 class CatalogsController < ApplicationController
   def index
     if params[:current_path] && params[:current_path] != 'root'
-      # && !Catalog.find_by(path: params[:current_path]).root?
       @current_path = params[:current_path]
       @catalogs = Catalog.find_by(path: @current_path).children
     else
-      @current_path = 'Каталоги'
+      @current_path = ''
       @catalogs = Catalog.roots.sort
     end
-  end
-
-  def new
-    @catalog = Catalog.new
-    @current_path = params[:current_path]
   end
 
   def edit
@@ -20,29 +14,38 @@ class CatalogsController < ApplicationController
   end
 
   def create
-    @catalog = Catalog.create!(catalog_params)
+    @catalog = Catalog.new(catalog_params)
+    return if @catalog.save
+
     respond_to do |format|
-      format.turbo_stream
-      format.html { redirect_to catalogs_path }
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.update('errors', partial: 'shared/error_messages',
+                                                           locals: { obj: @catalog })
+      end
+      format.html { redirect_to catalogs_url, status: :ok }
     end
   end
 
   def update
     @catalog = Catalog.find(params[:id])
-    if @catalog.update!(catalog_params)
-      redirect_to catalogs_path(current_path: helpers.previous_path(params[:catalog][:path]) )
-    else
-      render edit
+    return if @catalog.update(catalog_params)
+
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.update('errors', partial: 'shared/error_messages',
+                                                           locals: { obj: @catalog })
+      end
+      format.html { redirect_to catalogs_url, status: :ok }
     end
   end
 
   def destroy
     @catalog = Catalog.find(params[:id])
     @catalog.destroy
-    flash.notice = 'Delete catalog item'
+    flash.now[:notice] = I18n.t(:delete)
     respond_to do |format|
       format.turbo_stream
-      format.html { redirect_to catalogs_url, notice: 'Successfully destroyed survey.' }
+      format.html { redirect_to catalogs_url, status: :ok }
     end
   end
 
