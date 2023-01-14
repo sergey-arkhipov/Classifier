@@ -17,6 +17,9 @@
 default: &default
   adapter: postgresql
   encoding: unicode
+  collation: 'ru_RU.UTF-8'
+  ctype: 'ru_RU.UTF-8'
+  template: template0
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>

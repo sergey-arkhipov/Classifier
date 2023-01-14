@@ -1,0 +1,13 @@
+ <%= turbo_frame_tag dom_id(@catalog) do %>
+ <%= form_with(model: @catalog,
+               data: { controller: 'reset-form', action: 'turbo:submit-end->reset-form#reset' }) do |form| %>
+    <div class="columns">
+    <div class="column is-four-fifths">
+      <%= form.text_field :path, class: 'input'%>
+      </div>
+      <div class="column">
+      <%= form.submit 'Обновить' , class: 'button is-success is-outlined' %>
+      </div>
+    </div>
+  <% end %>
+  <% end %>

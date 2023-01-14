@@ -1,0 +1,13 @@
+<p style="color: green"><%= notice %></p>
+<h1 class='title has-text-centerd'>Catalogs#index</h1>
+<h2 class='title-2'>А здесь путь текущий</h2>
+<hr>
+<b><%=link_to @current_path, catalogs_path(current_path: previous_path(@current_path))  %></b>
+<hr>
+<div class="columns">
+  <%=turbo_frame_tag 'catalogs' do %>
+    <%=turbo_frame_tag 'new', src: new_catalog_path(@catalog) %>
+
+    <%= render @catalogs %>
+  <% end %>
+</div>

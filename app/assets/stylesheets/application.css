@@ -12,4 +12,6 @@
  *
  *= require_tree .
  *= require_self
+ *= require bulma.min.css
+ *= require bulma-tooltip.min.css
  */
