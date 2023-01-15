@@ -70,3 +70,11 @@ end
 
 Capybara.server = :puma, { Silent: true }
 Capybara.javascript_driver = :selenium_headless
+
+RSpec.configure do |config|
+  config.before :all do
+    I18n.with_locale(:ru) do
+      I18n.default_locale = :ru
+    end
+  end
+end

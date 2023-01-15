@@ -15,27 +15,20 @@ class CatalogsController < ApplicationController
 
   def create
     @catalog = Catalog.new(catalog_params)
-    return if @catalog.save
 
-    respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: turbo_stream.update('errors', partial: 'shared/error_messages',
-                                                           locals: { obj: @catalog })
-      end
-      format.html { redirect_to catalogs_url, status: :ok }
+    if @catalog.save
+      respond_to(:turbo_stream)
+    else
+      respond_with_errors(@catalog)
     end
   end
 
   def update
     @catalog = Catalog.find(params[:id])
-    return if @catalog.update(catalog_params)
-
-    respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: turbo_stream.update('errors', partial: 'shared/error_messages',
-                                                           locals: { obj: @catalog })
-      end
-      format.html { redirect_to catalogs_url, status: :ok }
+    if @catalog.update(catalog_params)
+      redirect_to_index
+    else
+      respond_with_errors(@catalog)
     end
   end
 
@@ -53,5 +46,19 @@ class CatalogsController < ApplicationController
 
   def catalog_params
     params.require(:catalog).permit(:path)
+  end
+
+  def respond_with_errors(obj)
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.update('errors', partial: 'shared/error_messages',
+                                                           locals: { obj: })
+      end
+      format.html { redirect_to catalogs_url, status: :unprocessable_entity }
+    end
+  end
+
+  def redirect_to_index
+    redirect_to catalogs_path(current_path: helpers.previous_path(params[:catalog][:path]))
   end
 end

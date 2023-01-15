@@ -31,7 +31,7 @@ RSpec.describe 'Catalogs' do
 
     it 'returns http success' do
       patch "/catalogs/#{catalog.id}", params: { catalog: valid_params }
-      expect(response).to have_http_status(:no_content)
+      expect(response).to have_http_status(:found)
     end
   end
 

@@ -26,7 +26,7 @@ opportunity to set how levels can be updated and destroyed.
 
 ### Methods
 
-All methods described in pg_ltree
+All methods described in pg_ltree can be use for working with catalog
 
 - :height,
 - :ancestors,
@@ -56,3 +56,9 @@ All methods described in pg_ltree
 - bundle install
 - rails db:create db:migrate
 - rails s
+
+## Warning
+
+Pay attention when validate ltree path, because put incorrect value can throw PG::SyntaxError: ERROR:  ltree syntax error!
+Some symbols will be interpreted as query string, read  [ltree manual](https://www.postgresql.org/docs/current/ltree.html#id-1.11.7.32.6)
+For example, validate uniquiness and allowed symbols (using regex, for example) can give you this error, because Rails perform validations independetly, so current path give you validation error  on allowed symbols and throw PG::Error on trying to do validation uniquiness.
